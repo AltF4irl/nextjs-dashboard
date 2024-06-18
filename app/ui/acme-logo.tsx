@@ -10,7 +10,7 @@ export default function AcmeLogo() {
       className={`${lusitana.className} flex flex-row items-center leading-none text-white`}
     >
       <ArrowPathRoundedSquareIcon className="h-12 w-12" />
-      <p className="text-[44px]">gitgud</p>
+      <p className="text-[44px]">Acme</p>
     </div>
   );
 }
