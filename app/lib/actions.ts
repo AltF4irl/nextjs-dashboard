@@ -1,16 +1,16 @@
 'use server';
 
-import { sql } from "@vercel/postgres";
-import { custom, z } from "zod";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { sql } from '@vercel/postgres';
+import { custom, z } from 'zod';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 const FormSchema = z.object({
-    is: z.string(),
-    customerId: z.string(),
-    amount: z.coerce.number(),
-    status: z.enum(['pending', 'paid']),
-    date: z.string(),
+  is: z.string(),
+  customerId: z.string(),
+  amount: z.coerce.number(),
+  status: z.enum(['pending', 'paid']),
+  date: z.string(),
 });
 
 const CreateInvoice = FormSchema.omit({ is: true, date: true });
@@ -35,21 +35,27 @@ export const createInvoice = async (formData: FormData) => {
 };
 
 export const editInvoice = async (id: string, formData: FormData) => {
-    const {customerId, amount, status} = CreateInvoice.parse({
-        customerId: formData.get('customerId'),
-        amount: formData.get('amount'),
-        status: formData.get('status'),
-    });
+  const { customerId, amount, status } = CreateInvoice.parse({
+    customerId: formData.get('customerId'),
+    amount: formData.get('amount'),
+    status: formData.get('status'),
+  });
 
-    const amountInCents = amount * 100; 
+  const amountInCents = amount * 100;
 
-    await sql`
+  await sql`
         UPDATE invoices
         SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
         WHERE id = ${id}
     `;
 
-    revalidatePath('/dashboard/invoices');
-    redirect('/dashboard/invoices');
-}
+  revalidatePath('/dashboard/invoices');
+  redirect('/dashboard/invoices');
+};
 
+export const removeInvoice = async (id: string) => {
+  await sql`
+        DELETE FROM invoices WHERE id = ${id}
+    `;
+    revalidatePath('/dashboard/invoices');
+};
