@@ -258,6 +258,8 @@ export function CustomersTableSkeleton() {
             <InvoicesMobileSkeleton />
             <InvoicesMobileSkeleton />
             <InvoicesMobileSkeleton />
+            <InvoicesMobileSkeleton />
+            <InvoicesMobileSkeleton />
           </div>
           <table className="hidden min-w-full text-gray-900 md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
@@ -280,6 +282,8 @@ export function CustomersTableSkeleton() {
               </tr>
             </thead>
             <tbody className="bg-white">
+              <CustomersTableRowSkeleton />
+              <CustomersTableRowSkeleton />
               <CustomersTableRowSkeleton />
               <CustomersTableRowSkeleton />
               <CustomersTableRowSkeleton />

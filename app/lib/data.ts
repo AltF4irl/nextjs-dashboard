@@ -193,11 +193,6 @@ export async function fetchCustomers() {
 export async function fetchTableCustomers() {
   noStore();
   try {
-    // console.log('Fetching revenue data...');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
-    
-
     const data = await sql<CustomersTableType>`
 		SELECT
 		  customers.id,
@@ -212,8 +207,6 @@ export async function fetchTableCustomers() {
 		GROUP BY customers.id, customers.name, customers.email, customers.image_url
 		ORDER BY customers.name ASC
 	  `;
-
-    console.log('Data fetch completed after 3 seconds.');
     const customers = data.rows;
     return customers;
   } catch (err) {
