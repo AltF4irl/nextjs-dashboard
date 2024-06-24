@@ -5,9 +5,9 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 export default function Loading() {
   return (
     <div className="w-full">
-      <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
-        Customers
-      </h1>
+      <div className="flex w-full items-center justify-between mb-4 md:mb-8">
+        <h1 className={`${lusitana.className} text-2xl`}>Customers</h1>
+      </div>
       <div className="relative flex flex-1 flex-shrink-0">
         <label htmlFor="search" className="sr-only">
           Search
