@@ -1,7 +1,6 @@
 import { fetchTableCustomers } from '@/app/lib/data';
 import { FormattedCustomersTable } from '@/app/lib/definitions';
 import CustomersTable from '@/app/ui/customers/table';
-import { lusitana } from '@/app/ui/fonts';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -22,7 +21,7 @@ const Page = async () => {
 
   return (
     <div className="w-full">
-      <CustomersTable customers={formattedCustomers} />
+        <CustomersTable customers={formattedCustomers} />
     </div>
   );
 };
