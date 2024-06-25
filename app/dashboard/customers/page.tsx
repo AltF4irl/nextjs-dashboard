@@ -1,4 +1,4 @@
-import { fetchTableCustomers } from '@/app/lib/data';
+import { fetchFilteredCustomers, fetchTableCustomers } from '@/app/lib/data';
 import { FormattedCustomersTable } from '@/app/lib/definitions';
 import CustomersTable from '@/app/ui/customers/table';
 import { Metadata } from 'next';
@@ -7,8 +7,13 @@ export const metadata: Metadata = {
   title: 'Customers',
 };
 
-const Page = async () => {
-  const customers = await fetchTableCustomers();
+const Page = async ({searchParams}: {
+  searchParams?: {
+    query?: string;
+  };
+}) => {
+  const customers = await fetchFilteredCustomers(searchParams?.query || '');
+
   const formattedCustomers: FormattedCustomersTable[] = customers.map(
     (customer) => {
       return {
@@ -21,7 +26,7 @@ const Page = async () => {
 
   return (
     <div className="w-full">
-        <CustomersTable customers={formattedCustomers} />
+      <CustomersTable customers={formattedCustomers} />
     </div>
   );
 };
